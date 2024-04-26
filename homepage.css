@@ -1,0 +1,70 @@
+body {
+  display: grid;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lavender;
+  height: 60px;
+  width: 100%;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+header a {
+  text-decoration: none;
+}
+.main {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+  background-color: #c6ac8f;
+}
+.dialog {
+  height: 500px;
+  width: 400px;
+  background-color: brown;
+  position: absolute;
+  top: 20%;
+  display: none;
+}
+.bhado {
+  height: 400px;
+  width: 300px;
+  background-color: green;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bhado h2 {
+  font-size: 30px;
+  position: relative;
+  bottom: 30%;
+}
+
+#textbtn {
+  height: 50px;
+  width: 200px;
+  position: relative;
+  top: 20%;
+}
+#textbtn a {
+  text-decoration: none;
+}
+#filesbtn {
+  height: 50px;
+  width: 200px;
+  position: relative;
+  top: 20%;
+}
+#filesbtn a {
+  text-decoration: none;
+}
+footer {
+  text-align: center;
+}

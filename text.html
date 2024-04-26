@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ftexts-easy,fast and secure text sharing</title>
+    <link rel="stylesheet" href="text.css" />
+  </head>
+
+  <body>
+    <div>
+      <nav>
+        <header><a href="homepage.html">filepathau</a></header>
+      </nav>
+      <div class="textarea">
+        <div id="forCode">
+          <span id="displayCode"></span
+          ><img
+            src="./assets/img/share-logo.png"
+            alt=""
+            height="24px"
+            width="24px"
+          />
+        </div>
+        <br />
+
+        <div class="wrapper">
+          <div>
+            <div id="labelrwFormat">
+              <label for="message" id="label">Enter your text</label>
+            </div>
+            <textarea
+              rows="200"
+              cols="5000"
+              id="message"
+              placeholder="Type or Paste here"
+              name="textarea"
+              style="padding: 20px"
+              value=" "
+            ></textarea
+            ><br />
+            <input
+              disabled
+              type="submit"
+              id="send"
+              value="Send"
+              onclick="codeDekhau();"
+            />
+            <button id="copytextAppear" onclick="copyText()">copy text</button>
+
+            <button id="update" onclick="updateText()">Update</button>
+            <button id="delete">Delete all</button>
+          </div>
+          <div id="Buttons">
+            <button
+              type="button"
+              onclick="f1()"
+              class="allformatbutton"
+              title="Bold Text"
+            >
+              Bold
+            </button>
+            <button
+              type="button"
+              onclick="f2()"
+              class="allformatbutton"
+              title="Italic Text"
+            >
+              Italic
+            </button>
+            <button
+              type="button"
+              onclick="f3()"
+              class="allformatbutton"
+              title="Left Align"
+            >
+              <i class="fas fa-align-left"></i>
+            </button>
+            <button
+              type="button"
+              onclick="f4()"
+              class="allformatbutton"
+              title="Center Align"
+            >
+              <i class="fas fa-align-center"></i>
+            </button>
+            <button
+              type="button"
+              onclick="f5()"
+              class="allformatbutton"
+              title="Right Align"
+            >
+              <i class="fas fa-align-right"></i>
+            </button>
+            <button
+              type="button"
+              onclick="f6()"
+              class="allformatbutton"
+              title="Uppercase Text"
+            >
+              Upper Case
+            </button>
+            <button
+              type="button"
+              onclick="f7()"
+              class="allformatbutton"
+              title="Lowercase Text"
+            >
+              Lower Case
+            </button>
+          </div>
+        </div>
+
+        <script>
+          let storeData = "";
+          const textButton = document.getElementById("copytextAppear");
+          const deleteButton = document.getElementById("delete");
+          const textarea = document.getElementById("message");
+          const characters =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          const formatdocButton = document.getElementById("formatDoc");
+          // let textarea = document.getElementById("message");
+
+          textarea.addEventListener("input", (e) => {
+            e.preventDefault();
+            const sendButton = document.getElementById("send");
+            console.log("text area = ", textarea.value);
+            if (textarea.value.trim() === "") {
+              sendButton.disabled = true;
+            } else {
+              sendButton.disabled = false;
+            }
+          });
+          function formatOption() {
+            formatdocButton.style.display = "inline-block";
+          }
+
+          function codeDekhau() {
+            let sendButton = document.getElementById("send");
+            storeData = textarea.value;
+            console.log("storedata = ", storeData);
+
+            document.getElementById("forCode").style.display = "inline-block";
+            let code = "Sharing code: " + generateString(4);
+            document.getElementById("displayCode").innerHTML = code;
+            // document.getElementById("send").style.display = "none";
+
+        
+
+
+            textButton.style.display = "inline-block";
+            deleteButton.style.display = "inline-block";
+            formatdocButton.style.display = "inline-block";
+          }
+
+          function generateString(length) {
+            let result = " ";
+            const charactersLength = characters.length;
+            for (let i = 0; i < length; i++) {
+              result += characters.charAt(
+                Math.floor(Math.random() * charactersLength)
+              );
+              console.log(result);
+            }
+            return result;
+          }
+
+          function copyText() {
+            // let textarea = document.getElementById('message');
+            // textarea.select();
+            // document.execCommand('copy');
+            // alert('Text copied to clipboard');
+
+            let inputValue = document.getElementById("message");
+            // Select the text within the textarea
+            let textToCopy = inputValue.value;
+
+            try {
+              // Copy the value of the input field to the clipboard
+              navigator.clipboard
+                .writeText(textToCopy)
+                .then(() => {
+                  console.log("Text copied to clipboard:", textToCopy);
+                  alert("Text copied to clipboard!");
+                })
+                .catch((err) => {
+                  console.error("Failed to copy text: ", err);
+                  alert("Failed to copy text. Please try again.");
+                });
+            } catch (err) {
+              console.error("Unable to copy text");
+              alert("Unable to copy text. Please try again.");
+            }
+          }
+
+          const updateText = () => {
+            // generateString(4);
+            document.getElementById("displayCode").innerHTML =
+              "Sharing code: " + generateString(4);
+            document.getElementById("update").style.display = "none";
+            document.getElementById("edit").style.display = "inline-block";
+            document.getElementById("message").disabled = true;
+          };
+
+          const btn = document.getElementById("delete");
+
+          btn.addEventListener("click", function handleClick() {
+            console.log(textarea.value);
+            textarea.value = "";
+          });
+        </script>
+
+        <br />
+      </div>
+    </div>
+  </body>
+</html>

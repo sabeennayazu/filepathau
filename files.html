@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>filepathau</title>
+    <link rel="stylesheet" href="files.css" />
+  </head>
+  <body>
+    <div class="main">
+      <nav>
+        <header>filepathau</header>
+        <div class="room">
+          <button class="roombtn" id="joinbtn">join room</button>
+          <button class="roombtn" id="createbtn">Create room</button>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="bhado">
+          <div class="select">
+            <form action="/action_page.php">
+              <label for="files">Select files:</label>
+              <input type="file" id="files" name="files" multiple /><br />
+            </form>
+          </div>
+          <div class="message">
+            <form action="#">
+              <div class="messageboxdiv">
+                <input placeholder="Enter text" class="messagebox" type="text">
+                <label for="messagebox" class="input-label">Enter text</label>
+                <span class="input-highlight"></span>
+              </div>
+              
+            </form>
+          </div>
+          <div class="link">
+            <form action="#">
+              <button id="getlink">Get a link</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
