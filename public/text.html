@@ -135,26 +135,39 @@
             formatdocButton.style.display = "inline-block";
           }
 
-          function codeDekhau() {
+          async function codeDekhau() {
             let sendButton = document.getElementById("send");
             storeData = textarea.value;
             console.log("storedata = ", storeData);
 
             document.getElementById("forCode").style.display = "inline-block";
-            let code = "Sharing code: " + generateString(4);
+            let shareableCode = generateString(6);
+            // console.log("this is the code", shareableCode);
+            let code = "Sharing code: " + shareableCode;
             document.getElementById("displayCode").innerHTML = code;
             // document.getElementById("send").style.display = "none";
 
-        
-
-
             textButton.style.display = "inline-block";
             deleteButton.style.display = "inline-block";
-            formatdocButton.style.display = "inline-block";
+
+            // formatdocButton.style.display = "inline-block";
+            try {
+              const data = { id: shareableCode, content: storeData };
+              const response = await fetch("/text", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              });
+              console.log(response.json);
+            } catch (err) {
+              console.log("err", err);
+            }
           }
 
           function generateString(length) {
-            let result = " ";
+            let result = "";
             const charactersLength = characters.length;
             for (let i = 0; i < length; i++) {
               result += characters.charAt(
