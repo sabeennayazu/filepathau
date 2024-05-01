@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ftexts-easy,fast and secure text sharing</title>
     <link rel="stylesheet" href="text.css" />
+    <link rel="stylesheet" href="homepage.css" />
   </head>
 
   <body>
@@ -16,7 +17,7 @@
         <div id="forCode">
           <span id="displayCode"></span
           ><img
-            src="./assets/img/share-logo.png"
+            src="/assets/img/share-logo.png"
             alt=""
             height="24px"
             width="24px"
@@ -221,6 +222,30 @@
             console.log(textarea.value);
             textarea.value = "";
           });
+
+          const getIdFromUrl = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get("id");
+            return id;
+          };
+
+          const id = getIdFromUrl();
+
+          const sharedCode = async (id) => {
+            try {
+              let response = await fetch(`/content/${id}`);
+              // if (!response.ok) {
+              //   throw new Error("Network response was not ok");
+              // }
+              let data = await response.json();
+              textarea.innerText = data.content;
+              console.log("data", data);
+              return data;
+            } catch (error) {
+              console.log("error", error);
+            }
+          };
+          sharedCode(id);
         </script>
 
         <br />

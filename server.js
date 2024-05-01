@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 // const db = require("db");
 const mysql = require("mysql");
-
+const path = require("path");
 const db = mysql.createConnection({
   hostname: "localhost",
   username: "root",
@@ -10,7 +10,7 @@ const db = mysql.createConnection({
   database: "ftext",
 });
 
-app.use(express.static("../public"));
+app.use(express.static("public"));
 app.use(express.json());
 const start = () => {
   try {
@@ -58,6 +58,23 @@ app.post("/text", (req, res) => {
       res.status(201).json("data inserted successfully");
     }
   );
+});
+
+app.get("/text.html/:id", (req, res) => {
+  const id = req.params.id;
+  if (!id || typeof id !== "string") {
+    res.status(400).json({ error: "invalid id" });
+  }
+  db.query(`select content from text where id = ?`, id, (err, result) => {
+    if (err) throw err;
+    if (result.length === 0) {
+      return res.status(404).json({ error: "content not found" });
+    }
+    console.log("content", result[0]);
+    // res.status(200).send(result[0]);
+    const content = result[0];
+    res.sendFile(path.join(__dirname, "public/text.html"), { content });
+  });
 });
 
 // db.end();
